@@ -59,10 +59,11 @@ export class ApiService {
   }
 
   ClearAll() {
-    this.delete = this.delete + this.notes.size;
+    // this.delete = this.delete + this.notes.size;
     this.notes.clear();
     this.filter = null;
     this.lastId = 0;
+    this.delete = 0;
   }
 
 }
