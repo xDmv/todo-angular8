@@ -12,6 +12,7 @@ import { TodoListItemComponent } from './pages/todo/components/todo-list-item/to
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './pages/todo/components/footer/footer.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     TodoSearchComponent,
     TodoFilterComponent,
     TodoAddComponent,
-    TodoListItemComponent
+    TodoListItemComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

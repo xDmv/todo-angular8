@@ -13,6 +13,7 @@ export class ApiService {
   public lastId: number = 0;
   public notes = new Map();
   public filter = null;
+  public delete: number = 0;
 
   constructor(
     public http: HttpClient
@@ -54,9 +55,11 @@ export class ApiService {
 
   deleteTodoByID(id: number) { 
     this.notes.delete(id);
+    this.delete++;
   }
 
   ClearAll() {
+    this.delete = this.delete + this.notes.size;
     this.notes.clear();
     this.filter = null;
     this.lastId = 0;

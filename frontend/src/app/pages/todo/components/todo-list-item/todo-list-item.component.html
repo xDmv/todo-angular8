@@ -1,4 +1,4 @@
-<div class="text">
+<div class="todo__list__item">
 	<div class="col-md-1 col-xs-1">{{index+1}}</div>
 	<div class="col-md-1 col-xs-1">
 		<span 
@@ -16,13 +16,17 @@
 		<!-- <button *ngIf="note.value.text.length>10">
 			more
 		</button> -->
-		<button (click)="toggleImportantID(notekey)">
+		<button 
+			class="todo__list__item-btn"
+			(click)="toggleImportantID(notekey)">
 			Important
 		</button>
-		<button>
+		<button class="todo__list__item-btn">
 			Edit
 		</button>
-		<button (click)="onDeleteID(notekey)">
+		<button 
+			class="todo__list__item-btn"
+			(click)="onDeleteID(notekey)">
 			Delete
 		</button>
 	</div>

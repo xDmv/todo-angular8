@@ -8,6 +8,7 @@
 			type="text" 
 			formControlName="note" 
 			class="todo__add-input"
+			[(ngModel)] = "todo"
 			[ngStyle]="addNoteForm.invalid ? {'border':'2px solid red'}:{'border':'1px solid transparent'}">
 		<button class="todo__add-btn">
 			+ Add
