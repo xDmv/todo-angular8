@@ -1,14 +1,25 @@
 <div class="todo--filter col-md-5 col-xs-5">
-	<button class="todo--filter--btn">
-		All
+	<button 
+		class="todo--filter--btn"
+		[ngClass]="filter === null ? 'active': ''"
+		(click)="setFilterStatus('null')">
+			All
 	</button>
-	<button class="todo--filter--btn">
-		Active
+	<button 
+		class="todo--filter--btn"
+		[ngClass]="filter === false ? 'active': ''"
+		(click)="setFilterStatus('false')">
+			Active
 	</button>
-	<button class="todo--filter--btn">
+	<button 
+		class="todo--filter--btn"
+		[ngClass]="filter === true ? 'active': ''"
+		(click)="setFilterStatus('true')">
 		Done
 	</button>
-	<button class="todo--filter--btn">
-		Clear
+	<button 
+		class="todo--filter--btn"
+		(click)="onClearAll()">
+		Clear All
 	</button>
 </div>

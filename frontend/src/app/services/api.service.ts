@@ -12,6 +12,7 @@ export class ApiService {
 
   public lastId: number = 0;
   public notes = new Map();
+  public filter = null;
 
   constructor(
     public http: HttpClient
@@ -20,7 +21,6 @@ export class ApiService {
   }
 
   createTodo(text: string) {
-    
     const url = URL_API ;
     const myHeaders = new HttpHeaders({
       "Content-Type" : "application/json"
@@ -49,14 +49,17 @@ export class ApiService {
   }
 
   updateTodoByID(id: number, todo: Note) { 
-    console.log(id);
-    console.log(todo);
     this.notes.set(id, todo);
-    console.log(this.notes)
   }
 
   deleteTodoByID(id: number) { 
     this.notes.delete(id);
+  }
+
+  ClearAll() {
+    this.notes.clear();
+    this.filter = null;
+    this.lastId = 0;
   }
 
 }

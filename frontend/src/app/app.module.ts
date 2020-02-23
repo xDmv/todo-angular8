@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,9 +8,11 @@ import { TodoListComponent } from './pages/todo/components/todo-list/todo-list.c
 import { TodoSearchComponent } from './pages/todo/components/todo-search/todo-search.component';
 import { TodoFilterComponent } from './pages/todo/components/todo-filter/todo-filter.component';
 import { TodoAddComponent } from './pages/todo/components/todo-add/todo-add.component';
+import { TodoListItemComponent } from './pages/todo/components/todo-list-item/todo-list-item.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     TodoListComponent,
     TodoSearchComponent,
     TodoFilterComponent,
-    TodoAddComponent
+    TodoAddComponent,
+    TodoListItemComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +32,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -1,96 +1,26 @@
 <div>
-	<div class="row">
+	<div class="row text">
 		<div class="col-md-1 col-xs-1">#</div>
 		<div class="col-md-1 col-xs-1">Done</div>
 		<div class="col-md-7 col-xs-7">Notes</div>
 		<div class="col-md-3 col-xs-3">Modificate</div>
 	</div>
-	<div *ngIf="todos.size === 0">
+	<div *ngIf="todos.size === 0" class="">
 		Not Found!
 	</div>
 	<div class="row"
 		*ngFor="let note of todos | keyvalue; let i = index;">
-		<div class="col-md-1 col-xs-1">{{i+1}}</div>
-		<div class="col-md-1 col-xs-1">
-			<span 
-				[ngClass]="note.value.done ? 'circle' : 'circle2'"
-				(click)="toggleDoneID(note.key)">
-			</span>
-		</div>
-		<div class="col-md-7 col-xs-7 text"
-		[ngClass] = "note.value.done ? 'text-done' : ''"
-		[ngStyle] = "note.value.important ? {'font-weight':'bold'} : {'font-weight':'normal'}"
-		>
-			{{note.value.text}}
-		</div>
-		<div class="col-md-3 col-xs-3">
-			<!-- <button *ngIf="note.value.text.length>10">
-				more
-			</button> -->
-			<button (click)="toggleImportantID(note.key)">
-				Important
-			</button>
-			<button>
-				Edit
-			</button>
-			<button (click)="onDeleteID(note.key)">
-				Delete
-			</button>
-		</div>
+		<app-todo-list-item 
+			*ngIf="filters === null"
+			[todoitem]="note.value" 
+			[notekey]="note.key" 
+			[index]="i">
+		</app-todo-list-item>
+		<app-todo-list-item 
+		*ngIf="filters !== null && note.value.done === filters"
+		[todoitem]="note.value" 
+		[notekey]="note.key" 
+		[index]="i">
+	</app-todo-list-item>
 	</div>
-	<!-- <table>
-		<thead>
-			<tr class="row">
-				<th class="col-md-1 col-xs-1">#</th>
-				<th class="col-md-1 col-xs-1">Complete</th>
-				<th class="col-md-5 col-xs-5">Notes</th>
-				<th class="col-md-5 col-xs-5">Modificate</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="row">
-				<th class="col-md-1 col-xs-1">1</th>
-				<td class="col-md-1 col-xs-1">
-					<span>0</span>
-				</td>
-				<td class="col-md-6 col-xs-6">my first task</td>
-				<td class="col-md-5 col-xs-5">
-					<button>
-						more
-					</button>
-					<button>
-						important
-					</button>
-					<button>
-						edit
-					</button>
-					<button>
-						delete
-					</button>
-				</td>
-			</tr>
-			<tr 
-				class="row"
-				*ngFor="let note of api.notes | keyvalue; let i = index;"
-			>
-				<th class="col-md-1 col-xs-1">{{i+1}}</th>
-				<td class="col-md-1 col-xs-1"><span (click)="toggleCompleteID(i)">0</span></td>
-				<td>{{note.value.text}}</td>
-				<td class="col-md-5 col-xs-5">
-					<button>
-						more
-					</button>
-					<button (click)="toggleImportantID(i)">
-						important
-					</button>
-					<button>
-						edit
-					</button>
-					<button>
-						delete
-					</button>
-				</td>
-			</tr>
-		</tbody>
-	</table> -->
 </div>
