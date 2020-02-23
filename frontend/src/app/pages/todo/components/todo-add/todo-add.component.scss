@@ -1,0 +1,32 @@
+.todo__add{
+	// display: flex;
+	// align-items: center;
+	display: block;
+	.todo__add-lable{
+		font-size: 14px;
+		color: #c2c2c2;
+	}
+	.todo__add-input{
+		min-width: 300px;
+		width: 80%;
+		border-radius: 0.5rem;
+	}
+	.todo__add-invalid{
+		margin-top: 0.5rem;
+		color: red;
+		text-align: center;
+		font: 12px;
+	}
+	.todo__add-btn{
+		margin-left: 1rem;
+		border-radius: 0.5rem;
+		border: 1px solid transparent;
+		color: #000000;
+	}
+	.todo__add-btn:hover{
+		color: #e0f1f3;
+		background-color: #00ccffad;
+		text-decoration: none;
+		border: 1px solid #e0f1f3;
+	}
+}

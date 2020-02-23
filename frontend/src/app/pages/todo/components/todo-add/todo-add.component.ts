@@ -18,7 +18,7 @@ export class TodoAddComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.addNoteForm = this.formBuilder.group({
-			note: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]]
+			note: [null, [Validators.minLength(3), Validators.maxLength(250)]]
 		})
 	}
 
@@ -30,4 +30,6 @@ export class TodoAddComponent implements OnInit {
 		console.log(`x = ${x}`);
 		this.api.createTodo(x);
 	}
+
+
 }

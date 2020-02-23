@@ -1,16 +1,20 @@
 <form 
-	class="col-md-12 col-xs-12"
+	class="col-md-7 col-xs-7"
 	[formGroup]="addNoteForm" 
 	(ngSubmit)="onCreateNote()">
-	<section class="todo--add" >
-		<label for="" class="todo--add--lable">Add note</label>
-		<input type="text" formControlName="note"  >
-		<div class="todo--add--invalid">
-			Error
-		</div>
-		<button class="todo--add--btn">
+	<div class="todo__add" >
+		<label for="" class="todo__add-lable">Add todo: </label>
+		<input 
+			type="text" 
+			formControlName="note" 
+			class="todo__add-input"
+			[ngStyle]="addNoteForm.invalid ? {'border':'2px solid red'}:{'border':'1px solid transparent'}">
+		<button class="todo__add-btn">
 			+ Add
 		</button>
-	</section>
+		<div class="todo__add-invalid" *ngIf="addNoteForm.invalid">
+			Min 3 character or Maximum 250 characters
+		</div>
+	</div>
 </form>
 
