@@ -1,0 +1,35 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "todo-list backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js",
+    "dev": "nodemon ./src/server.js",
+    "start": "node ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xDmv/todo-angular.git"
+  },
+  "keywords": [
+    "todo-list",
+    "angular",
+    "node.js",
+    "express.js"
+  ],
+  "author": "Dima Makushin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xDmv/todo-angular/issues"
+  },
+  "homepage": "https://github.com/xDmv/todo-angular#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "sqlite-sync": "^0.3.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
