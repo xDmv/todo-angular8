@@ -1,0 +1,27 @@
+.todo--filter{
+	display: flex;
+	align-items: center;
+	.todo--filter--btn{
+		border-radius: 0.5rem 0rem 0rem 0.5rem;
+		border: 1px solid transparent;
+	}
+	.todo--filter--btn:nth-child(2){
+		border-radius: 0rem;
+		border: 1px solid transparent;
+	}
+	.todo--filter--btn:nth-child(3){
+		border-radius: 0rem;
+		border: 1px solid transparent;
+	}
+	.todo--filter--btn:last-of-type {
+		border-radius: 0rem 0.5rem 0.5rem 0rem;
+		border: 1px solid transparent;
+	}
+	.todo--filter--btn:active,
+	.todo--filter--btn:hover{
+		color: #e0f1f3;
+		background-color: #00ccffad;
+		text-decoration: none;
+		border: 1px solid #e0f1f3;
+	}
+}

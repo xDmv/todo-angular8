@@ -1,0 +1,16 @@
+<form 
+	class="col-md-12 col-xs-12"
+	[formGroup]="addNoteForm" 
+	(ngSubmit)="onCreateNote()">
+	<section class="todo--add" >
+		<label for="" class="todo--add--lable">Add note</label>
+		<input type="text" formControlName="note"  >
+		<div class="todo--add--invalid">
+			Error
+		</div>
+		<button class="todo--add--btn">
+			+ Add
+		</button>
+	</section>
+</form>
+

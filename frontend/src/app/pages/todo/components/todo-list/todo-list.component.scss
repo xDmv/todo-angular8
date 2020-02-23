@@ -1,0 +1,29 @@
+.circle{
+	background    : #00FF7F;
+	border        : 1px solid #c2c2c2;
+	border-radius : 50%;
+	width         : 10px;
+	height        : 10px;
+	display       : block;
+	margin-right  : 5px;
+}
+.circle2{
+	background    : transparent;
+	border        : 1px solid #c2c2c2;
+	border-radius : 50%;
+	width         : 10px;
+	height        : 10px;
+	display       : block;
+	margin-right  : 5px;
+}
+
+.text{
+	font-size: 14px;
+	color: #c2c2c2;
+}
+.text-done{
+	text-decoration: line-through;
+}
+.text-important{
+	font-weight: bold;
+}
