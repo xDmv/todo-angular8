@@ -39,4 +39,9 @@ export class TodoListItemComponent implements OnInit {
     this.api.deleteTodoByID(Number(id));
   }
 
+  onUpdateTodoID(id: any){
+    let note = this.api.getTodoByID(Number(id));
+    this.api.updateTodoByID(Number(id), note);
+  }
+
 }

@@ -4,6 +4,9 @@ import { environment } from '../../environments/environment';
 import { Note } from '../interfaces/note'
 
 const URL_API = environment.url_api;
+const myHeaders = new HttpHeaders({
+  "Content-Type" : "application/json"
+});
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +25,8 @@ export class ApiService {
   }
 
   createTodo(text: string) {
-    const url = URL_API ;
-    const myHeaders = new HttpHeaders({
-      "Content-Type" : "application/json"
-    });
+    const url = URL_API  + '/post';
+
     const body: Note = {
       text,
       done: false,
@@ -34,11 +35,19 @@ export class ApiService {
 
     this.notes.set(++this.lastId, body);
 
-    // const result = this.http.post(url, body);
-    // result.subscribe(
-    //   (data) => { console.log(data) },
-    //   (error) => { console.log('Error') }
-    // );
+    const result = this.http.post(url, body, {headers: myHeaders});
+    result.subscribe(
+      (data) => { console.log(data) },
+      (error) => { console.log(error) }
+    );
+  }
+
+  getServer(){
+    const result = this.http.get(URL_API, {headers: myHeaders});
+    result.subscribe(
+      data => { console.log('data get: ',  data) },
+      error => {console.log('error get:',  error)}
+    )
   }
 
   getTodosAll() {
@@ -51,11 +60,22 @@ export class ApiService {
 
   updateTodoByID(id: number, todo: Note) { 
     this.notes.set(id, todo);
+    const url = URL_API + '/put/' + id;
+    this.http.put(url, todo, {headers: myHeaders}).subscribe(
+      data => { console.log('data get: ',  data) },
+      error => {console.log('error get:',  error)}
+    )
   }
 
   deleteTodoByID(id: number) { 
     this.notes.delete(id);
     this.delete++;
+    const url = URL_API + '/delete/' + id;
+    console.log(`url: ${url}`);
+    this.http.delete(url, {headers: myHeaders}).subscribe(
+      data => { console.log('data delete: ',  data) },
+      error => {console.log('error delete:',  error)}
+    );
   }
 
   ClearAll() {
