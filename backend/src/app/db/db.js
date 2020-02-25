@@ -13,7 +13,7 @@ let db = new sqlite3.Database('notes.db', (err) => {
 			id INTEGER PRIMARY KEY AUTOINCREMENT, 
 			user_id INTEGER,
 			text TEXT,
-			complete INTEGER,
+			done INTEGER,
 			important INTEGER,
 			date_create TEXT,
 			date_update TEXT
