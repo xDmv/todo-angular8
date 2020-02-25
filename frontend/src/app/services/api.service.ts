@@ -24,7 +24,7 @@ export class ApiService {
 	constructor(
 		public http: HttpClient
 	) {
-		this.getServer();
+		// this.getServer();
 	}
 
 	getServer(){
@@ -43,7 +43,6 @@ export class ApiService {
 					this.notes.set(value.id, note);
 				}
 			);
-			console.log(this.notes);
 		},
 		error => {console.log('error get:',  error)}
 		)
