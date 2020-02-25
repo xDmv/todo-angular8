@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-
+import { Todos } from '../../../../interfaces/todos';
 
 @Component({
 	selector: 'app-todo-list',
@@ -12,7 +12,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 export class TodoListComponent implements OnInit {
 
 	dataSource = new MatTableDataSource();
-	displayedColumns: string[] = ['idex', 'done', 'note', 'button'];
+	displayedColumns: string[] = ['key', 'done', 'text', 'button'];
 	@ViewChild(MatPaginator, { static: false } ) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: false }) sort: MatSort;
 
@@ -20,33 +20,31 @@ export class TodoListComponent implements OnInit {
 		public api: ApiService,
 		public dialog: MatDialog
 	) { 
-		this.api.getServer();
 	}
 
 	ngOnInit(): void {
-		this.getAllTodos();
-	}
-
-	getAllTodos(){
-		
-		let arr = [];
-		console.log(this.api.notes);
-		for(let obj of this.api.notes.entries()){
-			let item = {
-				key: obj.keys,
-				done: obj.values
-			}
-			// arr.push(item);
-			console.log(item);
-		}
-		// console.log(arr);
-		// this.dataSource = new MatTableDataSource(arr);
-		// this.dataSource.paginator = this.paginator;
-		// this.dataSource.sort = this.sort;
 	}
 
 	get todos() {
-		return this.api.getTodosAll();
+		if (this.api.getTodosAll().size>0) {
+			let arr = [];
+			for(let obj of this.api.notes.entries()){
+				let item = {
+					key: obj[0],
+					done: obj[1].done,
+					text: obj[1].text,
+					important: obj[1].important
+				}
+				arr.push(item);
+			}
+			this.dataSource = new MatTableDataSource<Todos>(arr);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
+			// return this.api.getTodosAll();
+			return arr;
+		}
+
+		return 0;
 	}
 
 	get filters() {

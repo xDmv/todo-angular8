@@ -24,7 +24,7 @@ export class ApiService {
 	constructor(
 		public http: HttpClient
 	) {
-		// this.getServer();
+		this.getServer();
 	}
 
 	getServer(){
