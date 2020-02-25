@@ -15,9 +15,9 @@ app.get("/", function (request, response) {
 });
 
 app.get("/api/notes", (req, res, next) => {
-    var sql = "Select * From Notes"
-    var params = []
-    db.all(sql, params, (err, rows) => {
+		var sql = "Select * From Notes"
+		var params = []
+		db.all(sql, params, (err, rows) => {
 			if (err) {
 				res.status(400).json({"error":err.message});
 				return;
@@ -65,7 +65,7 @@ app.post("/api/notes", urlencodedParser, function (request, response) {
 	}
 });
 
-app.patch("/api/notes/:id", (req, res)=>{
+app.put("/api/notes/:id", (req, res)=>{
 	const body = req.body;
 	console.log(`patch id: ${req.params.id}`)
 	if(body.text){

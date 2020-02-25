@@ -19,10 +19,38 @@ export class ApiService {
 	public filter = null;
 	public delete: number = 0;
 
+	temp = new Map();
+
 	constructor(
 		public http: HttpClient
 	) {
-		console.log(this.notes.size);
+		this.getServer();
+	}
+
+	getServer(){
+		const result = this.http.get(URL_API, {headers: myHeaders});
+		result.subscribe(
+		(data) => { 
+			console.log('data get: ',  data)
+			let db_data : any = data;
+			db_data.data.map(
+				(value) =>{ 
+					let note : Note = {
+						text : value.text,
+						done: value.done,
+						important: value.important
+					}
+					this.notes.set(value.id, note);
+				}
+			);
+			console.log(this.notes);
+		},
+		error => {console.log('error get:',  error)}
+		)
+	}
+
+	getTodosAll() {
+		return this.notes;
 	}
 
 	createTodo(text: string) {
@@ -41,18 +69,6 @@ export class ApiService {
 		);
 	}
 
-	getServer(){
-		const result = this.http.get(URL_API, {headers: myHeaders});
-		result.subscribe(
-		data => { console.log('data get: ',  data) },
-		error => {console.log('error get:',  error)}
-		)
-	}
-
-	getTodosAll() {
-		return this.notes;
-	}
-
 	getTodoByID(id: number) {
 		return this.notes.get(id);
 	}
@@ -61,8 +77,8 @@ export class ApiService {
 		this.notes.set(id, todo);
 		const url = `${URL_API}/${id}`;
 		this.http.put(url, todo, {headers: myHeaders}).subscribe(
-			data => { console.log('data get: ',  data) },
-			error => {console.log('error get:',  error)}
+			data => { console.log('data update: ',  data) },
+			error => {console.log('error update:',  error)}
 		)
 	}
 

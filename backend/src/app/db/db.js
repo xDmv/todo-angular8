@@ -29,9 +29,9 @@ let db = new sqlite3.Database('notes.db', (err) => {
 		// 	CONSTRAINT email_unique UNIQUE (email));`
 		// );
 		(err) => {
-            if (err) {
-                // Table already created
-            }else{
+			if (err) {
+				console.log(`err: ${err}`);
+			}else{
 				let create_date = moment().format('dd.mm.yyyy HH:mm:ss');
 				let insertNote = `INSERT INTO Notes (user_id, text, complete, important, date_create, date_update) VALUES ( 911, 'Testing data', 0, 0, ${create_date}, ${create_date})`;
 				db.run(insertNote);
