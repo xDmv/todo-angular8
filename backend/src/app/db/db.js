@@ -18,6 +18,16 @@ let db = new sqlite3.Database('notes.db', (err) => {
 			date_create TEXT,
 			date_update TEXT
 		);`);
+		// db.run(`CREATE TABLE IF NOT EXISTS User(
+		// 	id INTEGER PRIMARY KEY AUTOINCREMENT, 
+		// 	name TEXT,
+		// 	email text UNIQUE,
+		// 	password text, 
+		// 	role INTEGER,
+		// 	date_create TEXT,
+		// 	date_update TEXT
+		// 	CONSTRAINT email_unique UNIQUE (email));`
+		// );
 		(err) => {
             if (err) {
                 // Table already created

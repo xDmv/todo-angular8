@@ -15,7 +15,7 @@ app.get("/", function (request, response) {
 });
 
 app.get("/api/notes", (req, res, next) => {
-    var sql = "select * from Notes"
+    var sql = "Select * From Notes"
     var params = []
     db.all(sql, params, (err, rows) => {
 			if (err) {
@@ -32,24 +32,23 @@ app.get("/api/notes", (req, res, next) => {
 app.get("/api/notes/:id", function (request, response) {
 	console.log(request.body);
 	console.log('get api test');
-
 	response.status(200).json({data: 'not found id'});
 });
 
 app.post("/api/notes", urlencodedParser, function (request, response) {
 	const body = request.body;
-	// console.log('add item');
 	try {
-		// console.log(`body.text: ${body.text}`);
 		if(body.text !== ""){
-			let user_id = 777;
-			let done = 0;
-			let important = 0;
-			if(body.done === true){ done = 1}
-			if(body.important === true){ done = 1}
-			// console.log(`done: ${done} important: ${important}`);
-			let create_date = moment().format('dd.mm.yyyy HH:mm:ss');
-			let params = [user_id, body.text, done, important, create_date, create_date];
+			let create_date = moment().format('DD-MM-YYYY HH:mm:ss');
+			let data = {
+				user_id: 777,
+				text: body.text,
+				done: 0,
+				important: 0,
+				date_create: create_date,
+				date_update: create_date
+			}
+			let params = [data.user_id, data.text, data.done, data.important, create_date, create_date];
 			let sql_add = `INSERT INTO Notes (user_id, text, done, important, date_create, date_update) VALUES ( ?, ?, ?, ?, ?, ?)`;
 			db.run(sql_add, params, function (err, result) {
 					if (err){
@@ -58,7 +57,6 @@ app.post("/api/notes", urlencodedParser, function (request, response) {
 					}
 					response.status(201).json({ "message": "success", "id" : this.lastID });
 				}
-				
 			);
 		}
 	}
@@ -67,20 +65,46 @@ app.post("/api/notes", urlencodedParser, function (request, response) {
 	}
 });
 
-app.put("/api/notes/:id", urlencodedParser, function (request, response){
-	const body = request.body;
-	console.log(`put id: ${request.params.id}`)
+app.patch("/api/notes/:id", (req, res)=>{
+	const body = req.body;
+	console.log(`patch id: ${req.params.id}`)
 	if(body.text){
-		return response.status(201).json({ status: 'success', message: 'save this data', data: body});
+		let done = body.done === true? 1:0;
+		let important = body.important === true? 1:0;
+		let update_date = moment().format('DD-MM-YYYY HH:mm:ss');
+		let data = {
+			user_id: 777,
+			text: body.text,
+			done: done,
+			important: important,
+			date_update: update_date
+		}
+		let params = [data.user_id, data.text, data.done, data.important, data.date_update, req.params.id];
+		let sql = `UPDATE Notes set 
+		user_id = COALESCE(?,user_id), 
+		text = COALESCE(?,text), 
+		done = COALESCE(?,done), 
+		important = COALESCE(?,important), 
+		date_update = COALESCE(?,date_update)
+		WHERE id = ?`;
+		db.run( sql, params, function (err, result) {
+			if (err){
+				res.status(401).json({"error": res.message});
+				return;
+			}
+				res.status(201).json({
+				message: "success",
+				data: data,
+				changes: this.changes
+			})
+		});
 	}
-	response.status(401).json({ status: 'error', message: 'have not data'  });
 });
 
 
 app.delete("/api/notes/:id", (req, res, next) => {
-	console.log(`delete id: ${req.params.id}`);
     db.run(
-        'DELETE FROM Notes WHERE id = ?',
+		'DELETE FROM Notes WHERE id = ?',
         req.params.id,
         function (err, result) {
             if (err){
