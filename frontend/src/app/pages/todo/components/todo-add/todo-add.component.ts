@@ -10,7 +10,6 @@ import { ApiService } from 'src/app/services/api.service';
 export class TodoAddComponent implements OnInit {
 
 	addNoteForm: FormGroup;
-	todo: string = '';
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -27,8 +26,8 @@ export class TodoAddComponent implements OnInit {
 		if (this.addNoteForm.invalid) {
 			return;
 		}
-		this.api.createTodo(this.todo);
-		this.todo = '';
+		this.api.createTodo(this.addNoteForm.controls.note.value);
+		this.addNoteForm.controls.note.clearValidators;
 	}
 
 

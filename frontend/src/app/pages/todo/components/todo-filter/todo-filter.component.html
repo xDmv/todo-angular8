@@ -1,5 +1,6 @@
-<div class="todo--filter col-md-5 col-xs-5">
-	<button 
+<div class="todo--filter">
+	<div class="col-md-4 col-xs-9">
+		<!-- <button 
 		class="todo--filter--btn"
 		[ngClass]="filter === null ? 'active': ''"
 		(click)="setFilterStatus('null')">
@@ -16,10 +17,26 @@
 		[ngClass]="filter === true ? 'active': ''"
 		(click)="setFilterStatus('true')">
 		Done
-	</button>
-	<button 
-		class="todo--filter--btn"
-		(click)="onClearAll()">
-		Clear All
-	</button>
+	</button> -->
+		<div class="btn-group btn-group-toggle" data-toggle="buttons">
+			<label class="btn btn-primary" [ngClass]="filter === null ? 'active': ''">
+			<input type="checkbox" checked="" autocomplete="off" (click)="setFilterStatus('null')"> All
+			</label>
+			<label class="btn btn-primary" [ngClass]="filter === false ? 'active': ''">
+			<input type="checkbox" autocomplete="off" (click)="setFilterStatus('false')"> Active
+			</label>
+			<label class="btn btn-primary" [ngClass]="filter === true ? 'active': ''">
+			<input type="checkbox" autocomplete="off" (click)="setFilterStatus('true')"> Done
+			</label>
+		</div>
+	</div>
+	<div class="col-md-1 col-xs-2">
+		<button type="button" class="btn btn-warning" (click)="onClearAll()">Clear All</button>
+		<!-- <button 
+			class="todo--filter--btn--clear"
+			(click)="onClearAll()">
+				Clear All
+		</button> -->
+	</div>
 </div>
+

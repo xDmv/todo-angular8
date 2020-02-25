@@ -1,6 +1,8 @@
 .todo--filter{
-	display: flex;
-	align-items: center;
+	// display: flex;
+	// align-items: center;
+	// justify-content: center;
+	
 	.todo--filter--btn{
 		border-radius: 0.5rem 0rem 0rem 0.5rem;
 		border: 1px solid transparent;
@@ -9,12 +11,16 @@
 		border-radius: 0rem;
 		border: 1px solid transparent;
 	}
-	.todo--filter--btn:nth-child(3){
-		border-radius: 0rem;
-		border: 1px solid transparent;
-	}
+	// .todo--filter--btn:nth-child(3){
+	// 	border-radius: 0rem;
+	// 	border: 1px solid transparent;
+	// }
 	.todo--filter--btn:last-of-type {
 		border-radius: 0rem 0.5rem 0.5rem 0rem;
+		border: 1px solid transparent;
+	}
+	.todo--filter--btn--clear{
+		border-radius: 0.5rem;
 		border: 1px solid transparent;
 	}
 	.active,
