@@ -24,8 +24,6 @@ export class TodoListComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		// this.updatetable();
-		
 	}
 
 	updatetable(){
@@ -63,5 +61,9 @@ export class TodoListComponent implements OnInit {
 	onDeleteID(id: any) {
 		this.api.deleteTodoByID(Number(id));
 	}
-
+	
+	onUpdateTodoID(id: any){
+		let note = this.api.getTodoByID(Number(id));
+		this.api.updateTodoByID(Number(id), note);
+	}
 }
