@@ -18,7 +18,7 @@ export class ApiService {
 	public notes = new Map();
 	public filter = null;
 	public delete: number = 0;
-
+	public tb_array = [];
 	temp = new Map();
 
 	constructor(
@@ -43,6 +43,16 @@ export class ApiService {
 					this.notes.set(value.id, note);
 				}
 			);
+			for(let obj of this.notes.entries()){
+				let item = {
+					key: obj[0],
+					done: obj[1].done,
+					text: obj[1].text,
+					important: obj[1].important
+				}
+				this.tb_array.push(item);
+			}
+			console.log(this.tb_array)
 		},
 		error => {console.log('error get:',  error)}
 		)

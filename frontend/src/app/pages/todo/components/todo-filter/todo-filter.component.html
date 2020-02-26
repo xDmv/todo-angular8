@@ -1,5 +1,5 @@
-<div class="todo--filter">
-	<div class="col-md-4 col-xs-9">
+<!-- <div class="todo--filter"> -->
+	<!-- <div class="col-md-4 col-xs-9">
 
 		<div class="btn-group btn-group-toggle" data-toggle="buttons">
 			<label class="btn btn-primary" [ngClass]="filter === null ? 'active': ''">
@@ -12,10 +12,18 @@
 			<input type="checkbox" autocomplete="off" (click)="setFilterStatus('true')"> Done
 			</label>
 		</div>
-	</div>
-	<!-- <div class="col-md-1 col-xs-2">
-		<button type="button" class="btn btn-warning" (click)="onClearAll()">Clear All</button>
-	</div> -->
-	<app-todo-clear></app-todo-clear>
-</div>
+</div> -->
+	<mat-button-toggle-group color="primary" #group="matButtonToggleGroup" >
+		<mat-button-toggle value="null" (change)="setFilterStatus($event.value)">
+			All
+		</mat-button-toggle>
+		<mat-button-toggle value="0" (change)="setFilterStatus($event.value)">
+			Active
+		</mat-button-toggle>
+		<mat-button-toggle value="1" (change)="setFilterStatus($event.value)">
+			Completed
+		</mat-button-toggle>
+	</mat-button-toggle-group>
+	
+<!-- </div> -->
 

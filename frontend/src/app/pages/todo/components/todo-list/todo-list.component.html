@@ -1,31 +1,65 @@
 <div>
 	<table 
 		mat-table 
-		[dataSource]="todos" 
+		[dataSource]="dataSource" 
 		matSort
-		class="mat-elevation-z8">
+		class="mat-elevation-z8"
+		style="width: -webkit-fill-available;">
 
 		<ng-container matColumnDef="key">
-		  <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+		  <th mat-header-cell *matHeaderCellDef> No. </th>
 		  <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
 		</ng-container>
 
-		<ng-container matColumnDef="done">
-		  <th mat-header-cell *matHeaderCellDef mat-sort-header> Done </th>
-		  <td mat-cell *matCellDef="let element"> {{element.done}} </td>
-		</ng-container>
+		<!-- <ng-container matColumnDef="done">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> Done </th>
+			<td mat-cell *matCellDef="let element"> 
+				<span 
+					[ngClass]="element.done === 1 ? 'circle' : 'circle2'"
+					(click)="toggleDoneID(element.key)">
+				</span>
+			</td>
+		</ng-container> -->
 
 		<ng-container matColumnDef="text">
 		  <th mat-header-cell *matHeaderCellDef mat-sort-header> Note </th>
-		  <td mat-cell *matCellDef="let element"> {{element.text}} </td>
+		  <td mat-cell *matCellDef="let element" 
+			[ngClass] = "element.done ? 'text-done' : ''"
+			[ngStyle] = "element.important ? {'font-weight':'bold'} : {'font-weight':'normal'}"
+			(click)="toggleDoneID(element.key)"> 
+			<p>
+				<span 
+				[ngClass]="element.done === 1 ? 'circle' : 'circle2'"
+				(click)="toggleDoneID(element.key)">
+				<i class="material-icons">check_circle_outline</i>
+			</span>
+			{{element.text}} 
+			</p>
+		</td>
 		</ng-container>
+
 		<ng-container matColumnDef="button">
 			<th mat-header-cell *matHeaderCellDef> Button </th>
 			<td mat-cell *matCellDef="let element"> 
-				<button mat-raised-button color="primary">
+				<!-- <button mat-raised-button color="primary">
 					Detals
 					<i class="material-icons">more_horiz</i>
+				</button> -->
+				<button type="button"
+					class="btn btn-outline-primary"
+					(click)="toggleDoneID(element.key)">
+						Done
 				</button>
+				<button type="button"
+					class="btn btn-outline-secondary"
+					(click)="toggleImportantID(element.key)">
+						Important
+				</button>
+				<button type="button"
+				class="btn btn-outline-warning"
+				(click)="onDeleteID(element.key)">
+					Delete
+			</button>
 			</td>
 		</ng-container>
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -56,4 +90,10 @@
 		[index]="i">
 	</app-todo-list-item>
 	</div> -->
+	<button 
+		type="button" 
+		class="btn btn-outline-danger" 
+		(click)="updatetable()">
+			Test
+	</button>
 </div>

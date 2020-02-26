@@ -15,25 +15,9 @@ export class TodoFilterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  setFilterStatus(st: string) { 
-    switch(st) { 
-      case "null": { 
-        this.api.filter = null;
-        break; 
-      } 
-      case "true": { 
-        this.api.filter = true;
-        break; 
-      } 
-      case "false": { 
-        this.api.filter = false;
-        break; 
-      } 
-      default: { 
-        this.api.filter = null;
-        break; 
-      }
-    }
+  setFilterStatus(value) { 
+    console.log(`value: ${value}`);
+    this.api.filter = value;
   }
 
   onClearAll() {

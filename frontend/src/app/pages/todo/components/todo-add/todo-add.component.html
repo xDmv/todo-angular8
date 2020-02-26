@@ -1,34 +1,22 @@
-<form 
-	
-	[formGroup]="addNoteForm" 
-	(ngSubmit)="onCreateNote()">
-	<div class="form-group" [ngClass]="addNoteForm.invalid ? 'has-danger' : ''">
-		<label class="form-control-label" for="inputDanger1">Add todo:</label>
-		<input 
-			type="text" 
-			formControlName="note" 
-			class="form-control" id="inputInvalid" 
-			[ngClass]="addNoteForm.invalid ? 'is-invalid' : ''">
-		<div class="invalid-feedback"  *ngIf="addNoteForm.invalid">
-			Min 3 character or Maximum 250 characters
-		</div>
-		<button class="btn btn-primary">
-			+ Add
-		</button>
+	<div class="example-container">
+		<mat-form-field appearance="fill">
+			<mat-label>Please, enter note: </mat-label>
+			<input 
+				matInput 
+				placeholder="enter your note" 
+				[formControl]="note"
+				(change)="onCreateNote()">
+			<mat-error >
+				Min 3 character or Maximum 250 characters
+			</mat-error>
+		</mat-form-field>
+		<!-- <button mat-raised-button 
+			[disabled]="note.invalid"
+			color="primary"
+			(click)="onCreateNote()">
+			<i class="material-icons">
+				add_circle
+			</i>
+			Add
+		</button> -->
 	</div>
-	<!-- <div class="todo__add" >
-		<label for="" class="todo__add-lable">Add todo: </label>
-		<input 
-			type="text" 
-			formControlName="note" 
-			class="todo__add-input"
-			[(ngModel)] = "todo"
-			[ngStyle]="addNoteForm.invalid ? {'border':'2px solid red'}:{'border':'1px solid transparent'}">
-		<button class="todo__add-btn">
-			+ Add
-		</button>
-		<div class="todo__add-invalid" *ngIf="addNoteForm.invalid">
-			Min 3 character or Maximum 250 characters
-		</div>
-	</div> -->
-</form>

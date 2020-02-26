@@ -1,6 +1,12 @@
 .todo{
 	margin-top: 50px;
+	.todo__options{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 	.todo--list--block{
 		margin-top: 20px;
 	}
+
 }

@@ -21,6 +21,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatButtonToggleModule, MatInputModule } from '@angular/material';
 
 
 @NgModule({
@@ -46,7 +48,11 @@ import { MatSortModule } from '@angular/material/sort';
 		MatDialogModule,
 		MatPaginatorModule,
 		MatTableModule,
-		MatSortModule
+		MatSortModule,
+		MatFormFieldModule,
+		MatButtonModule,
+		MatButtonToggleModule,
+		MatInputModule
 	],
 	providers: [],
 	bootstrap: [AppComponent],

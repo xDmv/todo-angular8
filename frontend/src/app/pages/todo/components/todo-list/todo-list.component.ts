@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Todos } from '../../../../interfaces/todos';
+import { Note } from '../../../../interfaces/note';
 
 @Component({
 	selector: 'app-todo-list',
@@ -12,7 +13,7 @@ import { Todos } from '../../../../interfaces/todos';
 export class TodoListComponent implements OnInit {
 
 	dataSource = new MatTableDataSource();
-	displayedColumns: string[] = ['key', 'done', 'text', 'button'];
+	displayedColumns: string[] = ['key',  'text', 'button'];
 	@ViewChild(MatPaginator, { static: false } ) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: false }) sort: MatSort;
 
@@ -23,32 +24,44 @@ export class TodoListComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		// this.updatetable();
+		
 	}
 
-	get todos() {
-		if (this.api.getTodosAll().size>0) {
-			let arr = [];
-			for(let obj of this.api.notes.entries()){
-				let item = {
-					key: obj[0],
-					done: obj[1].done,
-					text: obj[1].text,
-					important: obj[1].important
-				}
-				arr.push(item);
-			}
-			this.dataSource = new MatTableDataSource<Todos>(arr);
+	updatetable(){
+			this.api.getServer();
+			this.dataSource = new MatTableDataSource<Todos>(this.api.tb_array);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
-			// return this.api.getTodosAll();
-			return arr;
-		}
-
-		return 0;
 	}
 
-	get filters() {
-		return this.api.filter;
+	// get todos() {
+	// 	if (this.api.tb_array.length>0) {
+	// 		console.log('1');
+	// 		return this.updatetable();
+	// 	}
+	// 	this.api.getServer();
+	// 	return 0
+	// }
+
+	// get filters() {
+	// 	return this.api.filter;
+	// }
+	toggleDoneID(id: any) {
+		let key : number = Number(id);
+		let note: Note = this.api.getTodoByID(key);
+		note.done = !note.done;
+		this.api.updateTodoByID(key, note)
+	}
+
+	toggleImportantID(id: any) {
+		let note = this.api.getTodoByID(Number(id));
+		note.important = !note.important;
+		this.api.updateTodoByID(Number(id), note)
+	}
+	
+	onDeleteID(id: any) {
+		this.api.deleteTodoByID(Number(id));
 	}
 
 }
