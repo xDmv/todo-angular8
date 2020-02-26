@@ -69,14 +69,12 @@ app.put("/api/notes/:id", (req, res)=>{
 	const body = req.body;
 	console.log(`patch id: ${req.params.id}`)
 	if(body.text){
-		let done = body.done === true? 1:0;
-		let important = body.important === true? 1:0;
 		let update_date = moment().format('DD-MM-YYYY HH:mm:ss');
 		let data = {
 			user_id: 777,
 			text: body.text,
-			done: done,
-			important: important,
+			done: body.done,
+			important: body.important,
 			date_update: update_date
 		}
 		let params = [data.user_id, data.text, data.done, data.important, data.date_update, req.params.id];
