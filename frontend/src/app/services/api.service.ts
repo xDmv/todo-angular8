@@ -27,7 +27,7 @@ export class ApiService {
 	constructor(
 		public http: HttpClient
 	) {
-		//this.getServer();
+		this.getServer();
 	}
 
 	getServer(){
@@ -36,40 +36,21 @@ export class ApiService {
 		(data) => { 
 			console.log('data get: ',  data)
 			let database: any = data;
-			let database_ = database.data ;
-			console.log(database_);
+			let database_ = database.data as Todo[];
+			// return database_;
+// console.log(database_);
 			// database_.map((value)=>{
-			// 	// Object.assign(this.notes, ... value);
-			// 	console.log(value.id);
-			// 	// console.log(
-			// 	// 	this.notes.filter(this.notes.[0].key => this.notes.key)
-			// 	// )
-			// }
-			// )
-			console.log(this.notes)
-			// let db_data : any = data;
-			// db_data.data.map(
-			// 	(value) =>{ 
-			// 		let note : Note = {
-			// 			text : value.text,
-			// 			done: value.done,
-			// 			important: value.important
-			// 		}
-			// 		this.notes.set(value.id, note);
+			// 	let obj = {
+			// 		id: value.id,
+			// 		done: value.done,
+			// 		important: value.important,
+			// 		text: value.text
 			// 	}
-			// );
-			// for(let obj of this.notes.entries()){
-			// 	let item = {
-			// 		key: obj[0],
-			// 		done: obj[1].done,
-			// 		text: obj[1].text,
-			// 		important: obj[1].important
-			// 	}
-			// 	this.tb_array.push(item);
-			// }
-			// console.log(this.tb_array)
+			// 	this.notes.push(obj);
+			// });
+			// console.log(this.notes)
 		},
-		error => {console.log('error get:',  error)}
+		error => {console.log('error get:',  error); }
 		)
 	}
 
@@ -84,15 +65,13 @@ export class ApiService {
 				let obj: any  = data;
 				let new_note : Todo = 
 					{
-						key: obj.id,
+						id: obj.id,
 						done: body.done,
 						important: body.important,
 						text: body.text
 					}
 				;
-				console.log(new_note);
 				this.notes.push(new_note);
-				console.log(this.notes);
 			},
 			(error) => { console.log(error) }
 		);

@@ -4,6 +4,7 @@ import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Todos } from '../../../../interfaces/todos';
 import { Note } from '../../../../interfaces/note';
+import { async } from '@angular/core/testing';
 
 @Component({
 	selector: 'app-todo-list',
@@ -13,7 +14,7 @@ import { Note } from '../../../../interfaces/note';
 export class TodoListComponent implements OnInit {
 
 	dataSource = new MatTableDataSource();
-	displayedColumns: string[] = ['key',  'text', 'button'];
+	displayedColumns: string[] = ['id',  'text', 'button'];
 	@ViewChild(MatPaginator, { static: false } ) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: false }) sort: MatSort;
 
@@ -29,10 +30,11 @@ export class TodoListComponent implements OnInit {
 
 	updatetable(){
 			this.api.getServer();
+			
 			console.log('list');
-			this.dataSource = new MatTableDataSource<Todos>(this.api.notes);
-			this.dataSource.paginator = this.paginator;
-			this.dataSource.sort = this.sort;
+			// this.dataSource = new MatTableDataSource();
+			// this.dataSource.paginator = this.paginator;
+			// this.dataSource.sort = this.sort;
 	}
 
 	// get todos() {
