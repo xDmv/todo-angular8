@@ -5,7 +5,7 @@
 		matSort
 		class="mat-elevation-z8"
 		style="width: -webkit-fill-available;">
-
+		
 		<ng-container matColumnDef="key">
 		  <th mat-header-cell *matHeaderCellDef> No. </th>
 		  <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
@@ -37,7 +37,8 @@
 			<th mat-header-cell *matHeaderCellDef> Button </th>
 			<td mat-cell *matCellDef="let element"> 
 				<button mat-raised-button 
-				type="button"
+					type="button"
+					title="State done item by ID"
 					(click)="toggleDoneID(element.key)"
 					[ngClass]="element.done === 1 ? 'circle' : 'circle2'">
 					<i class="material-icons">check_circle_outline</i>
@@ -45,6 +46,7 @@
 				<button type="button"
 					mat-raised-button 
 					color="primary"
+					title="State important item by ID"
 					(click)="toggleImportantID(element.key)"
 					[ngClass]="element.important === 1 ? 'circle' : 'circle2'">
 					<i class="material-icons">outlined_flag</i>
@@ -52,6 +54,7 @@
 				<button type="button"
 					mat-raised-button 
 					color="warn"
+					title="Delete item by ID"
 					(click)="onDeleteID(element.key)">
 					<i class="material-icons">clear</i>
 				</button>

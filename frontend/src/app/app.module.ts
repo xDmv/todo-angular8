@@ -7,9 +7,8 @@ import { TodoListComponent } from './pages/todo/components/todo-list/todo-list.c
 import { TodoSearchComponent } from './pages/todo/components/todo-search/todo-search.component';
 import { TodoFilterComponent } from './pages/todo/components/todo-filter/todo-filter.component';
 import { TodoAddComponent } from './pages/todo/components/todo-add/todo-add.component';
-import { TodoListItemComponent } from './pages/todo/components/todo-list-item/todo-list-item.component';
 import { TodoClearComponent } from './pages/todo/components/todo-clear/todo-clear.component';
-import { FooterComponent } from './pages/todo/components/footer/footer.component';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -33,8 +32,6 @@ import { MatButtonToggleModule, MatInputModule } from '@angular/material';
 		TodoSearchComponent,
 		TodoFilterComponent,
 		TodoAddComponent,
-		TodoListItemComponent,
-		FooterComponent,
 		TodoClearComponent
 	],
 	imports: [

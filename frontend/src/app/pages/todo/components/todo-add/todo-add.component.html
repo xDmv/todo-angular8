@@ -4,6 +4,7 @@
 			<input 
 				matInput 
 				placeholder="enter your note" 
+				minlength="3"
 				[formControl]="note"
 				(change)="onCreateNote()">
 			<mat-error >

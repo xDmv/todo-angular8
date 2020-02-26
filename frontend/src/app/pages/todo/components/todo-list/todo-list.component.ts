@@ -24,11 +24,13 @@ export class TodoListComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		// this.updatetable();
 	}
 
 	updatetable(){
 			this.api.getServer();
-			this.dataSource = new MatTableDataSource<Todos>(this.api.tb_array);
+			console.log('list');
+			this.dataSource = new MatTableDataSource<Todos>(this.api.notes);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
 	}
@@ -46,16 +48,16 @@ export class TodoListComponent implements OnInit {
 	// 	return this.api.filter;
 	// }
 	toggleDoneID(id: any) {
-		let key : number = Number(id);
-		let note: Note = this.api.getTodoByID(key);
-		note.done = !note.done;
-		this.api.updateTodoByID(key, note)
+		// let key : number = Number(id);
+		// let note: Note = this.api.getTodoByID(key);
+		// note.done = !note.done;
+		// this.api.updateTodoByID(key, note)
 	}
 
 	toggleImportantID(id: any) {
-		let note = this.api.getTodoByID(Number(id));
-		note.important = !note.important;
-		this.api.updateTodoByID(Number(id), note)
+		// let note = this.api.getTodoByID(Number(id));
+		// note.important = !note.important;
+		// this.api.updateTodoByID(Number(id), note)
 	}
 	
 	onDeleteID(id: any) {
@@ -63,7 +65,7 @@ export class TodoListComponent implements OnInit {
 	}
 	
 	onUpdateTodoID(id: any){
-		let note = this.api.getTodoByID(Number(id));
-		this.api.updateTodoByID(Number(id), note);
+		// let note = this.api.getTodoByID(Number(id));
+		// this.api.updateTodoByID(Number(id), note);
 	}
 }

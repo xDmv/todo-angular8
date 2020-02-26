@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Validators, FormControl } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
+import { Note } from '../../../../interfaces/note'
 
 @Component({
 	selector: 'app-todo-add',
@@ -9,11 +10,12 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TodoAddComponent implements OnInit {
 
-	addNoteForm: FormGroup;
-	note = new FormControl('', [Validators.minLength(3), Validators.maxLength(250)]);
+	note = new FormControl('', [
+		Validators.minLength(3), 
+		Validators.maxLength(250)
+	]);
 
 	constructor(
-		private formBuilder: FormBuilder,
 		private api: ApiService
 	) { }
 
@@ -24,10 +26,14 @@ export class TodoAddComponent implements OnInit {
 		if (this.note.invalid) {
 			return;
 		}
-		console.log(this.note.value);
-		this.api.createTodo(this.note.value);
-		this.note.clearValidators;
-		// this.addNoteForm.controls.note.clearValidators;
+		if (this.note.value !== ''){
+			let data: Note = {
+				text: this.note.value,
+				done: 0,
+				important: 0
+			}
+			this.api.createTodo(data);
+		} 
 	}
 
 
