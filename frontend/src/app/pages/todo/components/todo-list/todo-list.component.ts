@@ -4,7 +4,7 @@ import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Todos } from '../../../../interfaces/todos';
 import { Note } from '../../../../interfaces/note';
-import { async } from '@angular/core/testing';
+import { Todo } from '../../../../class/todo';
 
 @Component({
 	selector: 'app-todo-list',
@@ -25,49 +25,49 @@ export class TodoListComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		// this.updatetable();
+		this.onGetData();
 	}
 
-	updatetable(){
-			this.api.getServer();
-			
-			console.log('list');
-			// this.dataSource = new MatTableDataSource();
-			// this.dataSource.paginator = this.paginator;
-			// this.dataSource.sort = this.sort;
+	onGetData(){
+		this.api.getTodosAll().subscribe(
+			(data) =>{
+				let database: any = data;
+				this.dataSource = new MatTableDataSource<Todo>(database.data );
+				this.dataSource.paginator = this.paginator;
+				this.dataSource.sort = this.sort;
+			},
+			(error) =>{
+				console.error(error);
+			}
+		);
 	}
-
-	// get todos() {
-	// 	if (this.api.tb_array.length>0) {
-	// 		console.log('1');
-	// 		return this.updatetable();
-	// 	}
-	// 	this.api.getServer();
-	// 	return 0
-	// }
 
 	// get filters() {
 	// 	return this.api.filter;
 	// }
-	toggleDoneID(id: any) {
-		// let key : number = Number(id);
-		// let note: Note = this.api.getTodoByID(key);
-		// note.done = !note.done;
-		// this.api.updateTodoByID(key, note)
+
+	toggleDoneID(id: any, note: Todos) {
+		let key : number = Number(id);
+		note.done = note.done === 0 ? 1:0;
+		this.api.updateTodoByID(key, note).subscribe(
+			(data) => { this.onGetData();},
+			(error) => { console.error(error)}
+		);
 	}
 
-	toggleImportantID(id: any) {
-		// let note = this.api.getTodoByID(Number(id));
-		// note.important = !note.important;
-		// this.api.updateTodoByID(Number(id), note)
+	toggleImportantID(id: any, note: Todos) {
+		note.important = note.important === 0 ? 1:0;
+		this.api.updateTodoByID(Number(id), note).subscribe(
+			(data) => { this.onGetData(); },
+			(error) => { console.error(error)}
+		);
 	}
 	
 	onDeleteID(id: any) {
-		this.api.deleteTodoByID(Number(id));
+		this.api.deleteTodoByID(Number(id)).subscribe(
+			(data) => { this.onGetData(); },
+			(error) => { console.error(error)}
+		);
 	}
-	
-	onUpdateTodoID(id: any){
-		// let note = this.api.getTodoByID(Number(id));
-		// this.api.updateTodoByID(Number(id), note);
-	}
+
 }

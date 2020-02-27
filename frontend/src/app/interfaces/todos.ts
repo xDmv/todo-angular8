@@ -1,5 +1,5 @@
 export interface Todos {
-	key: number,
+	id: number,
 	done: number,
 	important: number;
 	text: string;

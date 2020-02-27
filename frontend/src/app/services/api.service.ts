@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Note } from '../interfaces/note'
 import { Todo } from '../class/todo';
-import { Observable } from 'rxjs';
+
 
 const entity = 'notes'
 const URL_API = environment.url_api.replace('ENTITY_TYPE', entity);
@@ -26,36 +26,11 @@ export class ApiService {
 
 	constructor(
 		public http: HttpClient
-	) {
-		this.getServer();
-	}
-
-	getServer(){
-		const result = this.http.get(URL_API, {headers: myHeaders});
-		result.subscribe(
-		(data) => { 
-			console.log('data get: ',  data)
-			let database: any = data;
-			let database_ = database.data as Todo[];
-			// return database_;
-// console.log(database_);
-			// database_.map((value)=>{
-			// 	let obj = {
-			// 		id: value.id,
-			// 		done: value.done,
-			// 		important: value.important,
-			// 		text: value.text
-			// 	}
-			// 	this.notes.push(obj);
-			// });
-			// console.log(this.notes)
-		},
-		error => {console.log('error get:',  error); }
-		)
-	}
+	) {	}
 
 	getTodosAll() {
-		return this.notes;
+		const result = this.http.get(URL_API, {headers: myHeaders});
+		return result;
 	}
 
 	createTodo(body: Note) {
@@ -78,26 +53,21 @@ export class ApiService {
 	}
 
 	getTodoByID(id: number) {
-		// return this.notes.get(id);
+		const url = `${URL_API}/${id}`;
+		const result = this.http.get(url, {headers: myHeaders});
+		return result;
 	}
 
 	updateTodoByID(id: number, todo: Note) { 
-		// this.notes.set(id, todo);
-		// const url = `${URL_API}/${id}`;
-		// this.http.put(url, todo, {headers: myHeaders}).subscribe(
-		// 	data => { console.log('data update: ',  data) },
-		// 	error => {console.log('error update:',  error)}
-		// )
+		const url = `${URL_API}/${id}`;
+		const result = this.http.put(url, todo, {headers: myHeaders});
+		return result;
 	}
 
 	deleteTodoByID(id: number) { 
-		// this.notes.delete(id);
-		// this.delete++;
-		// const url = `${URL_API}/${id}`;
-		// this.http.delete(url, {headers: myHeaders}).subscribe(
-		// 	data => { console.log('data delete: ',  data) },
-		// 	error => {console.log('delete error:',  error)}
-		// );
+		const url = `${URL_API}/${id}`;
+		const result = this.http.delete(url, {headers: myHeaders});
+		return result;
 	}
 
 	ClearAll() {

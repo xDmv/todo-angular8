@@ -26,7 +26,7 @@
 		  <td mat-cell *matCellDef="let element" 
 			[ngClass] = "element.done ? 'text-done' : ''"
 			[ngStyle] = "element.important ? {'font-weight':'bold'} : {'font-weight':'normal'}"
-			(click)="toggleDoneID(element.key)"> 
+			(click)="toggleDoneID(element.id)"> 
 			<p>
 			{{element.text}} 
 			</p>
@@ -39,7 +39,7 @@
 				<button mat-raised-button 
 					type="button"
 					title="State done item by ID"
-					(click)="toggleDoneID(element.key)"
+					(click)="toggleDoneID(element.id, element)"
 					[ngClass]="element.done === 1 ? 'circle' : 'circle2'">
 					<i class="material-icons">check_circle_outline</i>
 				</button>
@@ -47,7 +47,7 @@
 					mat-raised-button 
 					color="primary"
 					title="State important item by ID"
-					(click)="toggleImportantID(element.key)"
+					(click)="toggleImportantID(element.id, element)"
 					[ngClass]="element.important === 1 ? 'circle' : 'circle2'">
 					<i class="material-icons">outlined_flag</i>
 				</button>
@@ -55,7 +55,7 @@
 					mat-raised-button 
 					color="warn"
 					title="Delete item by ID"
-					(click)="onDeleteID(element.key)">
+					(click)="onDeleteID(element.id)">
 					<i class="material-icons">clear</i>
 				</button>
 			</td>
@@ -92,11 +92,4 @@
 		[index]="i">
 	</app-todo-list-item>
 	</div> -->
-	<button 
-		title="А вот и я!"
-		type="button" 
-		class="btn btn-outline-danger" 
-		(click)="updatetable()">
-			Test
-	</button>
 </div>
