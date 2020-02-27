@@ -18,11 +18,8 @@ export class TodoListComponent implements OnInit {
 	@ViewChild(MatPaginator, { static: false } ) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: false }) sort: MatSort;
 
-	@Input() set FilterButton(value: any){
-		console.log(value, value + `value type: ${value}`);
-		if(value !== null){
+	@Input() set FilterButton(value: string){
 			this.getAllData();
-		}
 	}
 	@Input() set filterTable(filterValue: string){
 		// const filterValue = (event.target as HTMLInputElement).value;
@@ -71,8 +68,11 @@ export class TodoListComponent implements OnInit {
 		this.api.getTodosAll().subscribe(
 			(data) =>{
 				let database: any = data;
-				if((this.api.filter !== null) && ( this.api.filter !== undefined)){
-					this.dataSource = new MatTableDataSource<Todo>(this.filterInputData(database.data));
+				
+				if((typeof(this.api.filter) !== null)){
+					console.log('fff');
+					let data = this.filterInputData(database.data);
+					this.dataSource = new MatTableDataSource<Todo>(data);
 					this.dataSource.paginator = this.paginator;
 					this.dataSource.sort = this.sort;
 					return

@@ -17,8 +17,8 @@ export class TodoFilterComponent implements OnInit {
 	}
 
 	setFilterStatus(value) { 
-		console.log(`value: ${value}`);
 		this.api.filter = value;
+		console.log('setFilterStatus: ',typeof(value));
 		this.onFilter.emit(value);
 	}
 

@@ -20,7 +20,6 @@ export class TodoComponent implements OnInit {
 	}
 
 	getValueFilterButton(value){
-		console.log('filter btn: ', value);
 		this.filterDone = value;
 		// setTimeout( () => {this.filterDone = null;}, 500 );
 	}
