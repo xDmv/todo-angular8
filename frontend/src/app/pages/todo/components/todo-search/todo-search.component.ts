@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-todo-search',
-  templateUrl: './todo-search.component.html',
-  styleUrls: ['./todo-search.component.scss']
+	selector: 'app-todo-search',
+	templateUrl: './todo-search.component.html',
+	styleUrls: ['./todo-search.component.scss']
 })
 export class TodoSearchComponent implements OnInit {
 
-  constructor() { }
+	@Output() filterValue = new EventEmitter();
+	constructor() { }
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+	}
 
+	onSeach(){
+		
+	}
 }

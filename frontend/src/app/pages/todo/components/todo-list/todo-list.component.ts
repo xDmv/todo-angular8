@@ -14,10 +14,20 @@ import { Todo } from '../../../../class/todo';
 export class TodoListComponent implements OnInit {
 
 	dataSource = new MatTableDataSource();
-	displayedColumns: string[] = ['id', 'done', 'text', 'button'];
+	displayedColumns: string[] = ['id', 'text', 'button'];
 	@ViewChild(MatPaginator, { static: false } ) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: false }) sort: MatSort;
-	@Input() test: boolean;
+
+	@Input() set FilterButton(value: any){
+		console.log(value, value + `value type: ${value}`);
+		if(value !== null){
+			this.getAllData();
+		}
+	}
+	@Input() set filterTable(filterValue: string){
+		// const filterValue = (event.target as HTMLInputElement).value;
+		this.dataSource.filter = filterValue.trim().toLowerCase();
+	}
 	@Input() set updateTable(update: string){
 		if(update === "ok"){
 			console.log('up');
@@ -33,27 +43,43 @@ export class TodoListComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getAllData();
+	}
 
+	filterInputData(data: any){
+		if((this.api.filter !== null) && ( this.api.filter !== undefined)){
+			console.log('start filter data', data);
+			let start : Todo[] = data;
+			let result : Todo[] = [];
+			start.map(
+				(value) => {
+					if(value.done === Number(this.api.filter)){
+						let item: Todos = {
+							id: value.id,
+							done: value.done,
+							important: value.done,
+							text: value.text
+						}
+						result.push(item);
+					}
+				}
+			)
+			return result;
+		}
 	}
 
 	getAllData(){
 		this.api.getTodosAll().subscribe(
 			(data) =>{
-				console.log(`this.api.filter: ${this.api.filter}`);
 				let database: any = data;
-				this.dataSource = new MatTableDataSource<Todo>(database.data );
+				if((this.api.filter !== null) && ( this.api.filter !== undefined)){
+					this.dataSource = new MatTableDataSource<Todo>(this.filterInputData(database.data));
+					this.dataSource.paginator = this.paginator;
+					this.dataSource.sort = this.sort;
+					return
+				}
+				this.dataSource = new MatTableDataSource<Todo>(database.data);
 				this.dataSource.paginator = this.paginator;
 				this.dataSource.sort = this.sort;
-				if(this.api.filter !== null){
-					console.log('1');
-					this.dataSource.filter = this.api.filter;
-					// this.dataSource.filterPredicate = function(data, filter: string): boolean {
-					// 	return 
-					//   };
-				}
-
-
-				// console.log(database.data.filter(x => x.done === this.api.filter));
 			},
 			(error) =>{
 				console.error(error);

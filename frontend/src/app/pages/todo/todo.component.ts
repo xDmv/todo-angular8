@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class TodoComponent implements OnInit {
 
 	update_data: string = '';
+	filterDone = null;
 
 	constructor(
 		public api:ApiService
@@ -18,12 +19,19 @@ export class TodoComponent implements OnInit {
 
 	}
 
+	getValueFilterButton(value){
+		console.log('filter btn: ', value);
+		this.filterDone = value;
+		// setTimeout( () => {this.filterDone = null;}, 500 );
+	}
+
+	onSeachItem(item: string){
+
+	}
+
 	onUpdateData(){
-		console.log('need update');
 		this.update_data = 'ok';
-		setTimeout(
-			()=>{this.update_data = '';}, 1000
-		)
+		setTimeout( () => {this.update_data = '';}, 500 );
 	}
 
 }

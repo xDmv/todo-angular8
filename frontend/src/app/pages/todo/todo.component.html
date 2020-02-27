@@ -1,16 +1,16 @@
-<header>
-
-</header>
 <main class="todo">
-	<!-- <section class="row todo--search-filter-block">
-		<app-todo-search></app-todo-search>
-	</section> -->
+	<section class="row todo--search-filter-block">
+		<app-todo-search (filterValue)="filterTable($event)"></app-todo-search>
+	</section>
 	<section class="todo__options">
-		<app-todo-add (onUp)="onUpdateData()"></app-todo-add>
-		<app-todo-filter></app-todo-filter>
-		<app-todo-clear></app-todo-clear>
+		<app-todo-add (onUp)="onUpdateData($event)"></app-todo-add>
+		<app-todo-filter (onFilter)="getValueFilterButton($event)"></app-todo-filter>
+		<app-todo-clear ></app-todo-clear>
 	</section>
 	<section class="todo--list--block">
-		<app-todo-list [updateTable]="update_data"></app-todo-list>
+		<app-todo-list 
+			[updateTable]="update_data" 
+			[FilterButton]="filterDone">
+		</app-todo-list>
 	</section>
 </main>

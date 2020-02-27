@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TodoFilterComponent implements OnInit {
 
+	@Output() onFilter = new EventEmitter()
 	constructor(
 		public api: ApiService
 	) { }
@@ -18,13 +19,7 @@ export class TodoFilterComponent implements OnInit {
 	setFilterStatus(value) { 
 		console.log(`value: ${value}`);
 		this.api.filter = value;
+		this.onFilter.emit(value);
 	}
 
-	onClearAll() {
-		this.api.ClearAll();
-	}
-
-	get filter() {
-		return this.api.filter;
-	}
 }
