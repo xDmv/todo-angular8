@@ -8,15 +8,16 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.use(bodyParser.json());
 
 
-app.get("/", function (request, response) {
+app.get("/api", function (request, response) {
 	console.log(request.body);
 	console.log('get api test');
-	response.status(200).json({data: `Not found!`, status: false});
+	response.status(400).json({data: `Not found!`, status: false});
 });
 
 app.get("/api/notes", (req, res, next) => {
-		var sql = "Select * From Notes"
-		var params = []
+		console.log(`get by All`);
+		let sql = "Select * From Notes"
+		let params = []
 		db.all(sql, params, (err, rows) => {
 			if (err) {
 				res.status(400).json({"error":err.message});
@@ -29,10 +30,21 @@ app.get("/api/notes", (req, res, next) => {
 		});
 });
 
-app.get("/api/notes/:id", function (request, response) {
-	console.log(request.body);
-	console.log('get api test');
-	response.status(200).json({data: 'not found id'});
+app.get("/api/notes/:id", function (req, res, next) {
+	console.log(`get by id: ${req.params.id}`);
+	let sql = `Select id, text, done, important From Notes WHERE id = ?`;
+	let params = [req.params.id];
+	db.get( sql, params, function (err, row) {
+		if (err){
+			res.status(401).json({"error": res.message});
+			return;
+		}
+		res.status(201).json({
+            "message":"success",
+            "data": row,
+			"changes": this.changes
+		})
+	});
 });
 
 app.post("/api/notes", urlencodedParser, function (request, response) {
@@ -101,6 +113,7 @@ app.put("/api/notes/:id", (req, res)=>{
 
 
 app.delete("/api/notes/:id", (req, res, next) => {
+	console.log(`delete by id: ${req.params.id}`);
     db.run(
 		'DELETE FROM Notes WHERE id = ?',
         req.params.id,
