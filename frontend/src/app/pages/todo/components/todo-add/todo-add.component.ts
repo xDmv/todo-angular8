@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Validators, FormControl } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { Note } from '../../../../interfaces/note'
@@ -15,6 +15,7 @@ export class TodoAddComponent implements OnInit {
 		Validators.maxLength(250)
 	]);
 
+	@Output() onUp = new EventEmitter()
 	constructor(
 		private api: ApiService
 	) { }
@@ -32,7 +33,13 @@ export class TodoAddComponent implements OnInit {
 				done: 0,
 				important: 0
 			}
-			this.api.createTodo(data);
+			this.api.createTodo(data).subscribe(
+				(data) => { 
+					console.log("data", data);
+					this.onUp.emit();
+				},
+				(error) => { console.log(error) }
+			);
 		} 
 	}
 

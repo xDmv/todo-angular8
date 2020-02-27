@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -17,6 +17,13 @@ export class TodoListComponent implements OnInit {
 	displayedColumns: string[] = ['id', 'done', 'text', 'button'];
 	@ViewChild(MatPaginator, { static: false } ) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: false }) sort: MatSort;
+	@Input() test: boolean;
+	@Input() set updateTable(update: string){
+		if(update === "ok"){
+			console.log('up');
+			this.getAllData();
+		}
+	}
 
 	constructor(
 		public api: ApiService,
@@ -25,11 +32,11 @@ export class TodoListComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.onGetData();
+		this.getAllData();
 
 	}
 
-	onGetData(){
+	getAllData(){
 		this.api.getTodosAll().subscribe(
 			(data) =>{
 				console.log(`this.api.filter: ${this.api.filter}`);
@@ -62,7 +69,7 @@ export class TodoListComponent implements OnInit {
 		let key : number = Number(id);
 		note.done = note.done === 0 ? 1:0;
 		this.api.updateTodoByID(key, note).subscribe(
-			(data) => { this.onGetData();},
+			(data) => { this.getAllData();},
 			(error) => { console.error(error)}
 		);
 	}
@@ -71,7 +78,7 @@ export class TodoListComponent implements OnInit {
 		let key : number = Number(id);
 		note.important = note.important === 0 ? 1:0;
 		this.api.updateTodoByID(key, note).subscribe(
-			(data) => { this.onGetData(); },
+			(data) => { this.getAllData(); },
 			(error) => { console.error(error)}
 		);
 	}
@@ -90,7 +97,7 @@ export class TodoListComponent implements OnInit {
 			result => {
 				if(result === 'ok'){
 					this.api.deleteTodoByID(key).subscribe(
-						(data) => { this.onGetData(); },
+						(data) => { this.getAllData(); },
 						(error) => { console.error(error)}
 					);
 				}

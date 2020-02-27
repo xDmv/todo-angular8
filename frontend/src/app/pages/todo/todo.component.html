@@ -6,11 +6,11 @@
 		<app-todo-search></app-todo-search>
 	</section> -->
 	<section class="todo__options">
-		<app-todo-add></app-todo-add>
+		<app-todo-add (onUp)="onUpdateData()"></app-todo-add>
 		<app-todo-filter></app-todo-filter>
 		<app-todo-clear></app-todo-clear>
 	</section>
 	<section class="todo--list--block">
-		<app-todo-list></app-todo-list>
+		<app-todo-list [updateTable]="update_data"></app-todo-list>
 	</section>
 </main>

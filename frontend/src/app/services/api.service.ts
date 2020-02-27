@@ -36,21 +36,7 @@ export class ApiService {
 
 	createTodo(body: Note) {
 		const result = this.http.post(URL_API, body, {headers: myHeaders});
-		result.subscribe(
-			(data) => { 
-				let obj: any  = data;
-				let new_note : Todo = 
-					{
-						id: obj.id,
-						done: body.done,
-						important: body.important,
-						text: body.text
-					}
-				;
-				this.notes.push(new_note);
-			},
-			(error) => { console.log(error) }
-		);
+		return result;
 	}
 
 	getTodoByID(id: number) {
