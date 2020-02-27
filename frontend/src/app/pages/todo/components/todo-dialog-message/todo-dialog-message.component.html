@@ -1,0 +1,22 @@
+<div class="block-message">
+	<div class="message">
+		<p [innerHTML]="dataparam.message"></p>
+		<p *ngIf="dataparam.note">
+			This note: " {{ dataparam.note }} "
+		</p>
+	</div>
+	<span class="box-message">
+		<button 
+			mat-raised-button 
+			color="basic" 
+			(click)="onCancale()">
+			No, thanks
+		</button>
+		<button 
+			mat-raised-button 
+			color="primary" 
+			(click)="onOk()">
+			Ok
+		</button>
+	</span>
+</div>

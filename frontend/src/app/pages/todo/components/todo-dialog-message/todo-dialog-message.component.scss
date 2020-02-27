@@ -1,0 +1,19 @@
+.block-message{
+	margin : 16px;
+	.message{
+		font-family     : Roboto, "Helvetica Neue", sans-serif;
+		font-size       : 21px;
+		font-weight     : 500;
+		text-decoration : none;
+		word-wrap       : break-word;
+	}
+	.box-message{
+		display         : flex;
+		align-items     : center;
+		justify-content : center;
+		margin          : 16px;
+		button : last-child{
+			margin-left : 16px;
+		}
+	}
+}

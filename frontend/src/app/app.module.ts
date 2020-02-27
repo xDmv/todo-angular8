@@ -22,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonToggleModule, MatInputModule } from '@angular/material';
+import { TodoDialogMessageComponent } from './pages/todo/components/todo-dialog-message/todo-dialog-message.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { MatButtonToggleModule, MatInputModule } from '@angular/material';
 		TodoSearchComponent,
 		TodoFilterComponent,
 		TodoAddComponent,
-		TodoClearComponent
+		TodoClearComponent,
+		TodoDialogMessageComponent
 	],
 	imports: [
 		BrowserModule,
@@ -53,6 +55,7 @@ import { MatButtonToggleModule, MatInputModule } from '@angular/material';
 	],
 	providers: [],
 	bootstrap: [AppComponent],
-	schemas: [CUSTOM_ELEMENTS_SCHEMA]
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
+	entryComponents:[TodoDialogMessageComponent]
 })
 export class AppModule { }

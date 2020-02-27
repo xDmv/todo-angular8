@@ -21,12 +21,13 @@ export class ApiService {
 	public notes: Todo[] = [];
 	public filter = null;
 	public delete: number = 0;
-	public tb_array = [];
-	temp = new Map();
+
 
 	constructor(
 		public http: HttpClient
-	) {	}
+	) {
+		this.filter = null;
+	}
 
 	getTodosAll() {
 		const result = this.http.get(URL_API, {headers: myHeaders});
@@ -71,10 +72,12 @@ export class ApiService {
 	}
 
 	ClearAll() {
-		this.notes = [];
-		this.filter = null;
-		this.lastId = 0;
-		this.delete = 0;
+		console.log('delete all items');
+		// ???
+		// this.notes = [];
+		// this.filter = null;
+		// this.lastId = 0;
+
 	}
 
 }
