@@ -15,7 +15,4 @@ export class TodoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getServersData(){
-    this.api.getServer();
-  }
 }
