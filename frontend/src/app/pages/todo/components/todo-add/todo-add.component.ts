@@ -27,7 +27,7 @@ export class TodoAddComponent implements OnInit {
 		if (this.note.invalid) {
 			return;
 		}
-		if (this.note.value !== ''){
+		if (this.note.value){
 			let data: Note = {
 				text: this.note.value,
 				done: 0,

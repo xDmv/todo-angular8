@@ -10,13 +10,13 @@ export class TodoComponent implements OnInit {
 
 	update_data: string = '';
 	filterDone = null;
+	filterNote : string = "";
 
 	constructor(
 		public api:ApiService
 	) { }
 
-	ngOnInit(): void {
-
+	ngOnInit(){
 	}
 
 	getValueFilterButton(value){
@@ -24,8 +24,9 @@ export class TodoComponent implements OnInit {
 		// setTimeout( () => {this.filterDone = null;}, 500 );
 	}
 
-	onSeachItem(item: string){
-
+	filterTable(letter){
+		console.log(`letter: ${letter} letter type: ${typeof (letter)}`);
+		this.filterNote = letter;
 	}
 
 	onUpdateData(){

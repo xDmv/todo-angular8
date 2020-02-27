@@ -1,16 +1,26 @@
 <main class="todo">
-	<section class="row todo--search-filter-block">
-		<app-todo-search (filterValue)="filterTable($event)"></app-todo-search>
+	<section class="row">
+		<app-todo-add 
+			class="col-md-4 col-xs12" 
+			(onUp)="onUpdateData()">
+		</app-todo-add>
+		<app-todo-search 
+			class="col-md-4 col-xs12" 
+			(filterValue)="filterTable($event)">
+		</app-todo-search>
+		<app-todo-filter 
+			class="col-md-4 col-xs-12"
+			(onFilter)="getValueFilterButton($event)">
+		</app-todo-filter>
+		<!-- <app-todo-clear 
+			class="col-md-1 col-xs-3">
+		</app-todo-clear> -->
 	</section>
-	<section class="todo__options">
-		<app-todo-add (onUp)="onUpdateData($event)"></app-todo-add>
-		<app-todo-filter (onFilter)="getValueFilterButton($event)"></app-todo-filter>
-		<app-todo-clear ></app-todo-clear>
-	</section>
-	<section class="todo--list--block">
+	<section>
 		<app-todo-list 
-			[updateTable]="update_data" 
-			[FilterButton]="filterDone">
+			[updateTable] ="update_data"
+			[filterTable] = "filterNote"
+			[FilterButton] ="filterDone">
 		</app-todo-list>
 	</section>
 </main>

@@ -1,14 +1,21 @@
-	<div>
-		<mat-form-field appearance="fill">
-			<mat-label>Please, enter note: </mat-label>
-			<input 
-				matInput 
-				placeholder="enter your note" 
-				minlength="3"
-				[formControl]="note"
-				(change)="onCreateNote()">
-			<mat-error >
-				Min 3 character or Maximum 250 characters
-			</mat-error>
-		</mat-form-field>
-	</div>
+<mat-form-field>
+	<mat-label>Please, enter note: </mat-label>
+	<input 
+		matInput 
+		placeholder="enter your note" 
+		minlength="3"
+		[formControl]="note">
+	<mat-error >
+		Min 3 character or Maximum 250 characters
+	</mat-error>
+</mat-form-field>
+<button 
+	mat-raised-button 
+	type="button"
+	title="Add note"
+	color="primary"
+	class="todo__add__button"
+	(click)="onCreateNote()">
+	+ Add note
+</button>
+

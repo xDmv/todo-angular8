@@ -42,35 +42,34 @@ export class TodoListComponent implements OnInit {
 		this.getAllData();
 	}
 
+	// applyFilter(event: Event) {
+	// 	const filterValue = (event.target as HTMLInputElement).value;
+	// 	this.dataSource.filter = filterValue.trim().toLowerCase();
+	// }
+
 	filterInputData(data: any){
-		if((this.api.filter !== null) && ( this.api.filter !== undefined)){
-			console.log('start filter data', data);
-			let start : Todo[] = data;
-			let result : Todo[] = [];
-			start.map(
-				(value) => {
-					if(value.done === Number(this.api.filter)){
-						let item: Todos = {
-							id: value.id,
-							done: value.done,
-							important: value.done,
-							text: value.text
-						}
-						result.push(item);
+		let result : Todo[] = [];
+		data.map(
+			(value) => {
+				if(value.done === Number(this.api.filter)){
+					let item: Todos = {
+						id: value.id,
+						done: value.done,
+						important: value.done,
+						text: value.text
 					}
+					result.push(item);
 				}
-			)
-			return result;
-		}
+			}
+		)
+		return result;
 	}
 
 	getAllData(){
 		this.api.getTodosAll().subscribe(
 			(data) =>{
 				let database: any = data;
-				
-				if((typeof(this.api.filter) !== null)){
-					console.log('fff');
+				if((this.api.filter !== 'null') && ( this.api.filter !== undefined)){
 					let data = this.filterInputData(database.data);
 					this.dataSource = new MatTableDataSource<Todo>(data);
 					this.dataSource.paginator = this.paginator;
@@ -86,10 +85,6 @@ export class TodoListComponent implements OnInit {
 			}
 		);
 	}
-
-	// get filters() {
-	// 	return this.api.filter;
-	// }
 
 	toggleDoneID(id: any, note: Todos) {
 		let key : number = Number(id);

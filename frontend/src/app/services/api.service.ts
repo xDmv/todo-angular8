@@ -63,7 +63,6 @@ export class ApiService {
 		// this.notes = [];
 		// this.filter = null;
 		// this.lastId = 0;
-
 	}
 
 }

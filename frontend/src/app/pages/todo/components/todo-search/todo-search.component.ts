@@ -13,7 +13,8 @@ export class TodoSearchComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	onSeach(){
-		
+	applyFilter(event: Event) {
+		let value = (event.target as HTMLInputElement).value;
+		if(value !== ''){ this.filterValue.emit(value); }
 	}
 }
