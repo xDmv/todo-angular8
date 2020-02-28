@@ -22,7 +22,6 @@ export class TodoListComponent implements OnInit {
 			this.getAllData();
 	}
 	@Input() set filterTable(filterValue: string){
-		// const filterValue = (event.target as HTMLInputElement).value;
 		this.dataSource.filter = filterValue.trim().toLowerCase();
 	}
 	@Input() set updateTable(update: string){
@@ -64,12 +63,14 @@ export class TodoListComponent implements OnInit {
 		this.api.getTodosAll().subscribe(
 			(data) =>{
 				let database: any = data;
-				if((this.api.filter !== 'null') && ( this.api.filter !== undefined)){
-					let data = this.filterInputData(database.data);
-					this.dataSource = new MatTableDataSource<Todo>(data);
-					this.dataSource.paginator = this.paginator;
-					this.dataSource.sort = this.sort;
-					return
+				if(
+					(this.api.filter !== 'null') && 
+					( this.api.filter !== undefined)){
+						let data = this.filterInputData(database.data);
+						this.dataSource = new MatTableDataSource<Todo>(data);
+						this.dataSource.paginator = this.paginator;
+						this.dataSource.sort = this.sort;
+						return
 				}
 				this.dataSource = new MatTableDataSource<Todo>(database.data);
 				this.dataSource.paginator = this.paginator;
