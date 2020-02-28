@@ -1,4 +1,4 @@
 export const environment = {
 	production: true,
-	url_api: 'http://localhost:4200/api/ENTITY_TYPE'
+	url_api: 'http://localhost:8080/api/ENTITY_TYPE'
 };

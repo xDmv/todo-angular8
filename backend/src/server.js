@@ -34,4 +34,4 @@ app.delete("/api/notes/:id", (req, res) => {
 	del.deleteById(req, res);
 })
 
-app.listen(port);
+app.listen(port, ()=>{console.log("App now running on port", port)});

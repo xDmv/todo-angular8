@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "todo-list backend",
   "main": "index.js",
+  "engines": {
+    "node": "12.15.x",
+    "npm": "6.13.4"
+  },
   "scripts": {
     "test": "node index.js",
     "dev": "nodemon ./src/server.js",
