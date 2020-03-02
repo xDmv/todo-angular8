@@ -6,6 +6,7 @@ import { TodoDialogMessageComponent } from '../todo-dialog-message/todo-dialog-m
 import { Todos } from '../../../../interfaces/todos';
 import { Todo } from '../../../../class/todo';
 
+
 @Component({
 	selector: 'app-todo-list',
 	templateUrl: './todo-list.component.html',
@@ -72,6 +73,7 @@ export class TodoListComponent implements OnInit {
 						this.dataSource.sort = this.sort;
 						return
 				}
+				console.log('database.data: ', database.data);
 				this.dataSource = new MatTableDataSource<Todo>(database.data);
 				this.dataSource.paginator = this.paginator;
 				this.dataSource.sort = this.sort;
