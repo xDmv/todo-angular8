@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Note } from '../interfaces/note'
-import { Todo } from '../class/todo';
-
+// import { Todo } from '../class/todo';
+import { Observable } from 'rxjs';
 
 const entity = 'notes'
 const URL_API = environment.url_api.replace('ENTITY_TYPE', entity);
@@ -16,11 +16,10 @@ const myHeaders = new HttpHeaders({
 })
 export class ApiService {
 
-	public lastId: number = 0;
-	// public notes = new Map();
-	public notes: Todo[] = [];
+	// public lastId: number = 0;
+	// public notes: Todo[] = [];
 	public filter = null;
-	public delete: number = 0;
+	// public delete: number = 0;
 
 
 	constructor(
@@ -59,6 +58,10 @@ export class ApiService {
 
 	ClearAll() {
 		console.log('delete all items');
+		const url = `${URL_API}/delAll`;
+		const body = {'confirm': 'Yes, delete all items.'};
+		const result = this.http.delete(url, {headers: myHeaders } );
+		return result;
 		// ???
 		// this.notes = [];
 		// this.filter = null;

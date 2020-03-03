@@ -13,6 +13,9 @@ export class TodoClearComponent implements OnInit {
 	ngOnInit() {
 	}
 	onClearAll() {
-		this.api.ClearAll();
+		this.api.ClearAll().subscribe(
+			(data)=>{ console.log(data); },
+			(error)=>{ console.log(error); }
+		);
 	}
 }
