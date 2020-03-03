@@ -3,7 +3,6 @@ const moment = require('moment');
 
 
 module.exports.create = (reg, res) => {
-	console.log('create');
 	const body = reg.body;
 	try {
 		if(body.text !== ""){

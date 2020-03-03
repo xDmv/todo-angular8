@@ -1,7 +1,6 @@
 const db = require('../db/db');
 
 module.exports.deleteById = (req, res) => {
-	console.log('delete');
 	const sql = "DELETE FROM Notes WHERE id = ?";
 	if( (req.params.id === "") || (req.params.id === undefined)){
 		res.status(400).json({"error": "Not have ID for delete item"})
@@ -22,7 +21,6 @@ module.exports.deleteById = (req, res) => {
 }
 
 module.exports.deleteAll = (req, res) => {
-	console.log('delete All');
 	const sql = "Delete From Notes";
 	db.run(
 		sql, 

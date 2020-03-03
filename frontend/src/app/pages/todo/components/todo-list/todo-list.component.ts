@@ -27,7 +27,6 @@ export class TodoListComponent implements OnInit {
 	}
 	@Input() set updateTable(update: string){
 		if(update === "ok"){
-			console.log('up');
 			this.getAllData();
 		}
 	}
@@ -74,7 +73,6 @@ export class TodoListComponent implements OnInit {
 						this.dataSource.sort = this.sort;
 						return
 				}
-				console.log('database.data: ', database.data);
 				this.dataSource = new MatTableDataSource<Todo>(database.data);
 				this.dataSource.paginator = this.paginator;
 				this.dataSource.sort = this.sort;

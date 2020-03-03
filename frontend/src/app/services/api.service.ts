@@ -57,15 +57,10 @@ export class ApiService {
 	}
 
 	ClearAll() {
-		console.log('delete all items');
 		const url = `${URL_API}/delAll`;
 		const body = {'confirm': 'Yes, delete all items.'};
 		const result = this.http.delete(url, {headers: myHeaders } );
 		return result;
-		// ???
-		// this.notes = [];
-		// this.filter = null;
-		// this.lastId = 0;
 	}
 
 }

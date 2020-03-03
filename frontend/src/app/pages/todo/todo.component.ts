@@ -25,7 +25,6 @@ export class TodoComponent implements OnInit {
 	}
 
 	filterTable(letter){
-		console.log(`letter: ${letter} letter type: ${typeof (letter)}`);
 		this.filterNote = letter;
 	}
 

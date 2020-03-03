@@ -2,7 +2,6 @@ const db = require('../db/db');
 const moment = require('moment');
 
 module.exports.up = (req, res) => {
-	console.log('up');
 	const body = req.body;
 	if(body.text){
 		let update_date = moment().format('DD-MM-YYYY HH:mm:ss');
@@ -17,7 +16,6 @@ module.exports.up = (req, res) => {
 		WHERE id = ?`;
 		db.run( sql, params, function (err, result) {
 			if (err){
-				console.log('date: ', update_date);
 				res.status(401).json({"error": err});
 				return;
 			}

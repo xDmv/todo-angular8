@@ -14,7 +14,7 @@ export class TodoClearComponent implements OnInit {
 	}
 	onClearAll() {
 		this.api.ClearAll().subscribe(
-			(data)=>{ console.log(data); },
+			(data)=>{ },
 			(error)=>{ console.log(error); }
 		);
 	}
