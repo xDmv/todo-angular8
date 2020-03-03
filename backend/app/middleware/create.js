@@ -27,6 +27,9 @@ module.exports.create = (reg, res) => {
 				}
 			);
 		}
+		else{
+			res.status(401).json({"error": "You must enter text note"});
+		}
 	}
 	catch (err) { 
 		return res.status(400).json({ error: err.message });

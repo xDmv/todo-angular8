@@ -1,7 +1,7 @@
 const db = require('../db/db');
 
 module.exports.getAll = (reg, res) => {
-	let sql = "Select * From Notes ORDER BY id ASC"
+	let sql = "Select * From Notes"
 	let params = []
 	db.all(sql, params, (err, rows) => {
 		if (err) {
