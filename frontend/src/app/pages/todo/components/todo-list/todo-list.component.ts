@@ -39,6 +39,7 @@ export class TodoListComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.api.filter = 'null';
 		this.getAllData();
 	}
 
