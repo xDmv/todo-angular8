@@ -16,11 +16,7 @@ const myHeaders = new HttpHeaders({
 })
 export class ApiService {
 
-	// public lastId: number = 0;
-	// public notes: Todo[] = [];
 	public filter = null;
-	// public delete: number = 0;
-
 
 	constructor(
 		public http: HttpClient
