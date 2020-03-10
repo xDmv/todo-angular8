@@ -36,6 +36,7 @@ export class TodoAddComponent implements OnInit {
 			this.api.createTodo(data).subscribe(
 				(data) => { 
 					this.onUp.emit();
+					this.note.reset();
 				},
 				(error) => { console.log(error) }
 			);

@@ -12,8 +12,10 @@ import { Todo } from '../../../../class/todo';
 	templateUrl: './todo-list.component.html',
 	styleUrls: ['./todo-list.component.scss']
 })
+	
 export class TodoListComponent implements OnInit {
 
+	notes: any;
 	dataSource = new MatTableDataSource();
 	displayedColumns: string[] = ['id', 'text', 'button'];
 	@ViewChild(MatPaginator, { static: false } ) paginator: MatPaginator;
@@ -121,6 +123,10 @@ export class TodoListComponent implements OnInit {
 				}
 			}
 		);
+
+	}
+
+	onDeleteDaneNote() { 
 
 	}
 
