@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
 
 @Component({
 	selector: 'app-todo',
@@ -12,16 +11,13 @@ export class TodoComponent implements OnInit {
 	filterDone = null;
 	filterNote : string = "";
 
-	constructor(
-		public api:ApiService
-	) { }
+	constructor() { }
 
 	ngOnInit(){
 	}
 
 	getValueFilterButton(value){
 		this.filterDone = value;
-		// setTimeout( () => {this.filterDone = null;}, 500 );
 	}
 
 	filterTable(letter){
