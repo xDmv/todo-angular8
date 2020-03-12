@@ -40,7 +40,7 @@
 		</ng-container>
 
 		<ng-container matColumnDef="button">
-			<th mat-header-cell *matHeaderCellDef style="width: 250px;"> Button </th>
+			<th mat-header-cell *matHeaderCellDef style="width: 280px;"> Button </th>
 			<td mat-cell *matCellDef="let element"> 
 				<button mat-raised-button 
 					type="button"
@@ -56,6 +56,14 @@
 					(click)="toggleImportantID(element.id, element)"
 					[ngClass]="element.important === 1 ? 'circle' : 'circle2'">
 					<i class="material-icons">outlined_flag</i>
+				</button>
+				<button type="button"
+				mat-raised-button 
+				color="accent"
+				title="Edit note by ID"
+				(click)="onEditNoteID(element.id, element)"
+				>
+					<i class="material-icons">edit</i>
 				</button>
 				<button type="button"
 					mat-raised-button 

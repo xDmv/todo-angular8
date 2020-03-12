@@ -4,7 +4,7 @@ import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TodoDialogMessageComponent } from '../todo-dialog-message/todo-dialog-message.component';
 import { Todos } from '../../../../interfaces/todos';
-import { Todo } from '../../../../class/todo';
+// import { Todo } from '../../../../class/todo';
 
 
 @Component({
@@ -45,7 +45,7 @@ export class TodoListComponent implements OnInit {
 	}
 
 	filterInputData(data: any){
-		let result : Todo[] = [];
+		let result : Todos[] = [];
 		data.map(
 			(value) => {
 				if(value.done === Number(this.api.filter)){
@@ -70,12 +70,12 @@ export class TodoListComponent implements OnInit {
 					(this.api.filter !== 'null') && 
 					( this.api.filter !== undefined)){
 						let data = this.filterInputData(database.data);
-						this.dataSource = new MatTableDataSource<Todo>(data);
+						this.dataSource = new MatTableDataSource<Todos>(data);
 						this.dataSource.paginator = this.paginator;
 						this.dataSource.sort = this.sort;
 						return
 				}
-				this.dataSource = new MatTableDataSource<Todo>(database.data);
+				this.dataSource = new MatTableDataSource<Todos>(database.data);
 				this.dataSource.paginator = this.paginator;
 				this.dataSource.sort = this.sort;
 			},
@@ -85,38 +85,36 @@ export class TodoListComponent implements OnInit {
 		);
 	}
 
-	toggleDoneID(id: any, note: Todos) {
-		let key : number = Number(id);
+	toggleDoneID(id: number, note: Todos) {
 		note.done = note.done === 0 ? 1:0;
-		this.api.updateTodoByID(key, note).subscribe(
+		this.api.updateTodoByID(id, note).subscribe(
 			(data) => { this.getAllData();},
 			(error) => { console.error(error)}
 		);
 	}
 
-	toggleImportantID(id: any, note: Todos) {
-		let key : number = Number(id);
+	toggleImportantID(id: number, note: Todos) {
 		note.important = note.important === 0 ? 1:0;
-		this.api.updateTodoByID(key, note).subscribe(
+		this.api.updateTodoByID(id, note).subscribe(
 			(data) => { this.getAllData(); },
 			(error) => { console.error(error)}
 		);
 	}
 	
-	onDeleteID(id: any, note: string) {
-		let key : number = Number(id);
+	onDeleteID(id: number, note: string) {
 		const dialogConfig = new MatDialogConfig();
 		dialogConfig.disableClose = false;
 		dialogConfig.autoFocus = false;
 		dialogConfig.data = {
 			message: "Do you really have to delete this note?",
-			note: note
+			note: note,
+			edit_note: false
 		}
 		const dialogRef = this.dialog.open(TodoDialogMessageComponent, dialogConfig);
 		dialogRef.afterClosed().subscribe(
 			result => {
 				if(result === 'ok'){
-					this.api.deleteTodoByID(key).subscribe(
+					this.api.deleteTodoByID(id).subscribe(
 						(data) => { this.getAllData(); },
 						(error) => { console.error(error)}
 					);
@@ -126,8 +124,34 @@ export class TodoListComponent implements OnInit {
 
 	}
 
-	onDeleteDaneNote() { 
-
+	onEditNoteID(id: number, note: Todos){
+		const dialogConfig = new MatDialogConfig();
+		dialogConfig.disableClose = false;
+		dialogConfig.autoFocus = false;
+		dialogConfig.data = {
+			message: "Do you want to edit this note?",
+			note: note.text,
+			edit_note: true
+		}
+		const dialogRef = this.dialog.open(TodoDialogMessageComponent, dialogConfig);
+		dialogRef.afterClosed().subscribe(
+			result => {
+				if(result === 'ok'){
+					this.api.deleteTodoByID(id).subscribe(
+						(data) => { this.getAllData(); },
+						(error) => { console.error(error)}
+					);
+					return
+				}
+				if(result !== 'not'){
+					note.text = result;
+					this.api.updateTodoByID(id, note).subscribe(
+						(data) => { this.getAllData(); },
+						(error) => { console.error(error)}
+					);
+				}
+			}
+		);
 	}
 
 }

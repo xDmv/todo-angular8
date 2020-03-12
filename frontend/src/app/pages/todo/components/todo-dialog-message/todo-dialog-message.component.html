@@ -4,6 +4,19 @@
 		<p *ngIf="dataparam.note">
 			This note: " {{ dataparam.note }} "
 		</p>
+		<mat-form-field *ngIf="dataparam.edit_note" class="box-edit">
+			<mat-label>Please, edit this note: </mat-label>
+			<input 
+				matInput 
+				placeholder="enter your note" 
+				minlength="3"
+				[value]="dataparam.note"
+				(click)="onChange()"
+				[formControl]="new_note" required>
+			<mat-error >
+				Min 3 character or Maximum 250 characters
+			</mat-error>
+		</mat-form-field>
 	</div>
 	<span class="box-message">
 		<button 

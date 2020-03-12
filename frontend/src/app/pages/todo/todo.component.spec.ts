@@ -22,4 +22,7 @@ describe('TodoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('shown getValueFilterButton()', () =>{
+  });
 });
