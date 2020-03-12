@@ -16,6 +16,8 @@ import { Todos } from '../../../../interfaces/todos';
 export class TodoListComponent implements OnInit {
 
 	notes: any;
+	pageSizeDefault : string = '5';
+	pageSizeOptionsDefault = [5, 10, 20, 100];
 	dataSource = new MatTableDataSource();
 	displayedColumns: string[] = ['id', 'text', 'button'];
 	@ViewChild(MatPaginator, { static: false } ) paginator: MatPaginator;
