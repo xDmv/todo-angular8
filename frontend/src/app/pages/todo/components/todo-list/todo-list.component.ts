@@ -4,7 +4,6 @@ import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TodoDialogMessageComponent } from '../todo-dialog-message/todo-dialog-message.component';
 import { Todos } from '../../../../interfaces/todos';
-// import { Todo } from '../../../../class/todo';
 
 
 @Component({
@@ -15,10 +14,10 @@ import { Todos } from '../../../../interfaces/todos';
 	
 export class TodoListComponent implements OnInit {
 
-	notes: any;
+	notes           : any;
 	pageSizeDefault : string = '5';
 	pageSizeOptionsDefault = [5, 10, 20, 100];
-	dataSource = new MatTableDataSource();
+	dataSource             = new MatTableDataSource();
 	displayedColumns: string[] = ['id', 'text', 'button'];
 	@ViewChild(MatPaginator, { static: false } ) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: false }) sort: MatSort;
