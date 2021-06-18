@@ -1,14 +1,15 @@
 const db = require('../db/db');
 
 module.exports.getAll = (reg, res) => {
-	let sql = "Select * From Notes ORDER BY id desc"
+	let sql = "Select * From Notes"
 	let params = []
 	db.all(sql, params, (err, rows) => {
 		if (err) {
-			res.status(403).json({"error":err.message});
+			res.status(400).json({"error":err.message});
 			return;
 		}
-		res.status(200).json({
+		console.log('Get All status: 201');
+		res.status(201).json({
 			"message":"success",
 			"data":rows
 		})

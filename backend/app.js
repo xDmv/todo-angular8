@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser   = require('body-parser');
+const cors = require('cors');
 
 const get = require('./app/middleware/get');
 const add = require('./app/middleware/create');
@@ -12,15 +13,17 @@ const del = require('./app/middleware/delete');
 
 const app = express();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 app.use(bodyParser.json());
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/api/notes/test', (req,res)=>{
-	res.status(200).json({'status API':  true, 'version': '1.0.0'})
+	res.status(200).json({'status API':  true, 'version': '1.0.1'})
 });
 
 app.get("/api", function (req, res) {
-	res.status(400).json({data: `Not found!`, status: false});
+	res.status(403).json({data: `Not found!`, status: false});
 });
 
 app.get("/api/notes", (req, res) => {
